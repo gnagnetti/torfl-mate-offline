@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EsameRouteImport } from './routes/esame'
+import { Route as PraticaRouteImport } from './routes/pratica'
+import { Route as StatisticheRouteImport } from './routes/statistiche'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsameRoute = EsameRouteImport.update({
+  id: '/esame',
+  path: '/esame',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PraticaRoute = PraticaRouteImport.update({
+  id: '/pratica',
+  path: '/pratica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatisticheRoute = StatisticheRouteImport.update({
+  id: '/statistiche',
+  path: '/statistiche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/esame': typeof EsameRoute
+  '/pratica': typeof PraticaRoute
+  '/statistiche': typeof StatisticheRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/esame': typeof EsameRoute
+  '/pratica': typeof PraticaRoute
+  '/statistiche': typeof StatisticheRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/esame': typeof EsameRoute
+  '/pratica': typeof PraticaRoute
+  '/statistiche': typeof StatisticheRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/esame' | '/pratica' | '/statistiche'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/esame' | '/pratica' | '/statistiche'
+  id: '__root__' | '/' | '/esame' | '/pratica' | '/statistiche'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EsameRoute: typeof EsameRoute
+  PraticaRoute: typeof PraticaRoute
+  StatisticheRoute: typeof StatisticheRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/esame': {
+      id: '/esame'
+      path: '/esame'
+      fullPath: '/esame'
+      preLoaderRoute: typeof EsameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pratica': {
+      id: '/pratica'
+      path: '/pratica'
+      fullPath: '/pratica'
+      preLoaderRoute: typeof PraticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistiche': {
+      id: '/statistiche'
+      path: '/statistiche'
+      fullPath: '/statistiche'
+      preLoaderRoute: typeof StatisticheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EsameRoute: EsameRoute,
+  PraticaRoute: PraticaRoute,
+  StatisticheRoute: StatisticheRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
