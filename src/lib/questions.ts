@@ -1,4 +1,5 @@
 import type { Category, Level, Question } from "./types";
+import pdfItems from "./pdf-questions.json";
 
 type Q = Omit<Question, "id" | "level" | "category">;
 const bank: Record<Level, Record<Category, Q[]>> = {
@@ -89,7 +90,7 @@ export const QUESTIONS: Question[] = Object.entries(bank).flatMap(([level, cats]
   Object.entries(cats).flatMap(([category, list]) =>
     list.map((q, i) => ({ ...q, id: `${level}-${category}-${i}`, level: level as Level, category: category as Category })),
   ),
-);
+).concat(pdfItems as Question[]);
 
 export function shuffle<T>(a: T[]): T[] {
   const r = [...a];

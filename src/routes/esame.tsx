@@ -23,7 +23,7 @@ function Exam() {
   const { user } = useUser();
   const [level, setLevelRaw] = useState<Level | null>(null);
   const [qs, setQs] = useState<typeof QUESTIONS>([]);
-  const setLevel = (l: Level | null) => { if (l) setQs(shuffle(QUESTIONS.filter((q) => q.level === l))); setLevelRaw(l); };
+  const setLevel = (l: Level | null) => { if (l) setQs(shuffle(QUESTIONS.filter((q) => q.level === l)).slice(0, 30)); setLevelRaw(l); };
   if (level) {
     return <Quiz testId={`exam-${level}`} title={`Esame ${level}`} questions={qs} passMark={66} timeLimit={qs.length * 60} feedback={false} onExit={() => setLevel(null)} />;
   }
