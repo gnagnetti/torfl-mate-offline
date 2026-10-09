@@ -27,7 +27,7 @@ export function Quiz({ testId, title, questions, passMark, timeLimit, feedback, 
     return () => clearTimeout(t);
   });
 
-  const q = questions[i];
+  const q = questions[i]!;
   const choose = (k: number) => {
     if (feedback && revealed) return;
     setAnswers((a) => a.map((v, j) => (j === i ? k : v)));

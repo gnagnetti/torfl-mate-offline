@@ -30,7 +30,7 @@ function Practice() {
   const start = () => {
     const hist = user?.itemHistory ?? {};
     // prioritise items answered wrong last time or never seen
-    const weight = (q: Question) => { const h = hist[q.id]; return !h ? 1 : h[h.length - 1].isCorrect ? 0 : 2; };
+    const weight = (q: Question) => { const h = hist[q.id]; return !h ? 1 : h[h.length - 1]!.isCorrect ? 0 : 2; };
     setRun(shuffle(pool).sort((a, b) => weight(b) - weight(a)).slice(0, 10));
   };
 
