@@ -21,9 +21,10 @@ export const Route = createFileRoute("/esame")({
 
 function Exam() {
   const { user } = useUser();
-  const [level, setLevel] = useState<Level | null>(null);
+  const [level, setLevelRaw] = useState<Level | null>(null);
+  const [qs, setQs] = useState<typeof QUESTIONS>([]);
+  const setLevel = (l: Level | null) => { if (l) setQs(shuffle(QUESTIONS.filter((q) => q.level === l))); setLevelRaw(l); };
   if (level) {
-    const qs = shuffle(QUESTIONS.filter((q) => q.level === level));
     return <Quiz testId={`exam-${level}`} title={`Esame ${level}`} questions={qs} passMark={66} timeLimit={qs.length * 60} feedback={false} onExit={() => setLevel(null)} />;
   }
   return (
